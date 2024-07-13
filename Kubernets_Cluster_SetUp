@@ -43,5 +43,7 @@ Establish the connection b/w Kubectl and cluster
     $ kubectl apply -f ./deployment.yml
     $ kubectl get pods (check pods are created or not)
     $ kubectl delete all --all
+Delete the cluster
+    $ eksctl delete cluster Tharun-cluster --region ca-central-1
 
 

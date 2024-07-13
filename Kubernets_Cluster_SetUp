@@ -4,13 +4,9 @@ Create EKS Management Host in AWS
 2. connect to Vm and using putty
 
 3. Install Kubectl .  Website Url For installing Kubectl (https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
-  $ curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.30.0/2024-05-12/bin/linux/amd64/kubectl
-  $ curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.30.0/2024-05-12/bin/linux/amd64/kubectl.sha256
-  $ sha256sum -c kubectl.sha256
-  $ openssl sha1 -sha256 kubectl
+  $ curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl
   $ chmod +x ./kubectl
-  $ mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
-  $ echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
+  $ mv kubectl /usr/bin
   $ kubectl version --client
 
 4. Install AWS CLI
@@ -26,10 +22,7 @@ Create EKS Management Host in AWS
   # (Optional) Verify checksum
   $ curl -sL "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_checksums.txt" | grep $PLATFORM | sha256sum --check
   $ tar -xzf eksctl_Linux_amd64.tar.gz 
-  $ mv eksctl /temp
-  $ sudo mv /tmp/eksctl /usr/local/bin
-  $ mkdir -p $HOME/bin && cp ./eksctl $HOME/bin/eksctl && export PATH=$HOME/bin:$PATH 
-  $ echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
+  $ sudo mv eksctl /usr/bin
   $ eksctl version
 
 6. Create IAM role Atteach to EKS Management Host
@@ -45,6 +38,10 @@ Create EKS Management Host in AWS
   * Syntax :
      $ eksctl create cluster --name Tharun-cluster --region ca-central-1 --node-type t2.micro --zones= ca-central-1a,ca-central-1b
 It will take time to create cluster 10 to 15mins
+Establish the connection b/w Kubectl and cluster
+    $ aws eks update-kubeconfig --name Tharun-cluster
+    $ kubectl apply -f ./deployment.yml
     $ kubectl get pods (check pods are created or not)
+    $ kubectl delete all --all
 
 

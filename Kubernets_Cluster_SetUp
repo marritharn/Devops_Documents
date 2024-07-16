@@ -36,7 +36,7 @@ Create EKS Management Host in AWS
 
 7. Create EKS Cluster Using eksctl
   * Syntax :
-     $ eksctl create cluster --name Tharun-cluster --region ca-central-1 --node-type t2.micro --zones= ca-central-1a,ca-central-1b
+     $ eksctl create cluster --name Tharun-cluster --region ca-central-1 --node-type t2.micro --zones ca-central-1a,ca-central-1b
 It will take time to create cluster 10 to 15mins
 Establish the connection b/w Kubectl and cluster
     $ aws eks update-kubeconfig --name Tharun-cluster
